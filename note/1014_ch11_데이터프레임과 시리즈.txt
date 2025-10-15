@@ -60,3 +60,107 @@ SQL의 JOIN과 유사 (inner, outer, left, right 가능)
 axis=0 → 행 방향 연결 (기본값)
 axis=1 → 열 방향 연결
 ignore_index=True 사용 시 인덱스 재설정
+
+7절 정렬(행이름, 열이름, 값)
+
+7.1 행이름으로 정렬
+
+df.sort_index(axis=0)
+→ 행 인덱스 기준 오름차순 정렬
+
+ascending=False 로 내림차순 가능
+
+7.2 열이름으로 정렬
+
+df.sort_index(axis=1)
+→ 열 이름 기준으로 정렬
+
+7.3 값에 의한 정렬
+
+df.sort_values(by='열이름')
+→ 특정 열의 값 기준 정렬
+
+여러 열 기준 정렬도 가능
+
+8절 기초 통계 분석
+8.1 min, max, mean 등
+
+df['열이름'].min(), df['열이름'].max(), df['열이름'].mean(), df['열이름'].median(), df['열이름'].std()
+
+8.2 요약 통계량
+
+df.describe()
+→ 평균, 표준편차, 최소/최대값, 사분위수 등 요약 정보 제공
+
+8.3 공분산 / 상관계수
+
+공분산 (covariance)
+→ 두 변수 간의 방향성 관계
+
+상관계수 (correlation)
+→ 두 변수 간의 선형 관계 (–1 ~ +1)
+
+9절 데이터 그룹화 및 집계 (iris 데이터 예제)
+
+from sklearn.datasets import load_iris
+import pandas as pd
+
+iris 데이터 로드
+
+iris = load_iris()
+df = pd.DataFrame(iris.data, columns=iris.feature_names)
+df['species'] = iris.target
+
+9.1 groupby - 품종별 평균
+
+grouped = df.groupby('species').mean()
+print(grouped)
+
+9.2 그룹별 통계치
+
+print(df.groupby('species')['sepal length (cm)'].agg(['mean', 'max', 'min']))
+
+9.3 그룹 인덱싱
+
+for name, group in df.groupby('species'):
+print(f"그룹 이름: {name}")
+print(group.head(2)) # 각 그룹의 상위 2개만 출력
+
+10절 데이터 구조 변경 (melt, pivot_table)
+10절 데이터 구조 변경
+
+10.1 melt() - 와이드포맷 → 롱포맷
+
+열(column)을 행(row) 형태로 변환
+
+데이터 형태를 긴 형식(long format)으로 변경
+
+id_vars : 유지할 열 지정
+value_vars : 변환할 열 지정
+var_name, value_name : 새 열 이름 지정
+
+10.2 pivot_table() - 롱포맷 → 와이드포맷
+
+melt()의 반대 개념으로 데이터를 넓은 형식(wide format)으로 변환
+Excel 피벗테이블과 유사한 기능
+
+index : 행 기준
+columns : 열 기준
+values : 값 기준
+aggfunc : 집계 함수 지정 (기본값 mean)
+
+11절 함수 적용 (apply / map / applymap)
+
+11.1 apply
+
+행 또는 열 단위로 함수를 적용할 때 사용
+DataFrame 전체 또는 Series 단위로 적용 가능
+
+11.2 map
+
+Series(단일 열)에 원소 단위로 함수나 매핑 적용
+
+11.3 applymap
+
+DataFrame 전체의 모든 원소에 함수 적용
+원소 단위로 일괄 처리됨

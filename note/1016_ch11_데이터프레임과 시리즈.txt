@@ -164,3 +164,30 @@ Series(단일 열)에 원소 단위로 함수나 매핑 적용
 
 DataFrame 전체의 모든 원소에 함수 적용
 원소 단위로 일괄 처리됨
+12절 일괄변경하기(결측치/특정값)
+
+목적: 결측치 처리, 값 치환, 조건부 치환, 결측 행/열 제거로 데이터 정리.
+
+12.1 fillna() – 결측치를 특정 값으로 대체
+
+형태: df.fillna(값), df['col'].fillna(값)
+값은 스칼라/딕셔너리/시리즈 가능.
+시계열: method='ffill'|'bfill', limit= 연속 개수 제한.
+주의: 원본 수정하려면 inplace=True.
+
+12.2 replace() – 값 치환(결측치 포함)
+
+형태: df.replace(옛값, 새값) / df.replace({열:{옛:새}})
+리스트/딕셔너리/정규식 지원: regex=True
+
+12.3 where() / mask() – 조건부 치환
+
+where(cond, other): cond가 True인 값은 유지, False는 other로 바꿈.
+mask(cond, other): cond가 True인 값만 other로 바꿈(=where의 반대).
+
+12.4 dropna() – 결측 행/열 삭제
+
+기본: 행 삭제. axis=1이면 열 삭제.
+how='any'|'all' : 하나라도 NaN이면/전부 NaN이면 삭제.
+thresh= : 비결측 최소 개수 기준 유지.
+subset=[...] : 판단에 사용할 열 제한.

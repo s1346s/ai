@@ -1,0 +1,73 @@
+1절 matplotlib
+
+1.1 패키지 import 및 기본 설정
+import matplotlib.pyplot as plt
+기본 설정: plt.rcParams로 폰트, 사이즈, 색상 등 변경 가능.
+
+1.2 그래프 그리기
+plt.plot(x, y)
+→ 기본 선 그래프. plt.show()로 출력.
+
+1.3 그래프 영역 나누기
+
+subplot() – 하나의 Figure에 여러 그래프 배치
+subplots() – 여러 서브플롯을 한 번에 생성
+
+1.4 다양한 그래프 그리기
+
+pyplot 함수 – https://matplotlib.org/api/_as_gen/matplotlib.pyplot.html
+기본: plt.plot()
+pandas.DataFrame.plot() – DataFrame 바로 시각화 가능
+plt.scatter() – 산점도 (점 그래프)
+
+1.5 주요 그래프 그리기
+
+boxplot() – 분포를 상자 형태로 표시 (→ violinplot과 비교)
+bar(), barh() – 막대그래프
+hist() – 도수분포표, 히스토그램
+axvline(), axhline(), fill(), fill_between() – 선/영역 강조
+pie() – 원형 그래프
+
+1.6 그래프 커스터마이징
+
+linestyle, linewidth, color, marker → 선 스타일 지정
+text(), annotate() → 텍스트 추가
+축기호 표시
+축눈금 설정
+축 이름
+범례(legend)
+플롯 스타일 지정 (plt.style.use())
+
+2절
+
+1)데이터준비
+2)미적속성설정
+sns.set(style='darkgrid', 
+        context='notebook',
+        palette='Set2',
+        rc={'figure.figsize':(10,3)}) 
+3) 그래프 함수
+ ① 관계형그래프 
+   - scatterplot, lineplot => relplot(서브플롯)
+ ② 범주형그래프
+   - stripplot(무작위로 흩뿌림), swarmplot(겹치지않음) - 점도표
+   - barplot, barhplot, pointplot(막대대신 marker가 있는 선)
+   - countplot(bar는 y의 평균값이높이, count는 x의 빈도수 높이)
+   - boxplot, violinplot, boxenplot     => catplot(서브플롯)
+
+ 서브플롯은 사이즈 지정을 따로 다른 방법
+
+③ 밀도그래프
+데이터의 분포를 부드럽게 표현
+
+주요 함수:
+kdeplot() : 커널 밀도 추정 곡선
+displot() : 히스토그램 + KDE 결합
+histplot() : 히스토그램
+
+④ 회귀그래프
+두 변수 간의 관계와 선형 회귀선 표시
+
+주요 함수:
+regplot() : 산점도 + 회귀선
+lmplot() : 여러 조건을 동시에 표현 가능 (서브플롯 형태)

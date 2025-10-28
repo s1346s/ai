@@ -1,0 +1,58 @@
+1. 태그 선택자
+   - HTML 태그 이름으로 직접 선택 (예: h1, p, div 등)
+   - 같은 태그 여러 개에 한꺼번에 스타일 적용 가능
+   - 예: p { color: blue; font-size: 14px; }
+
+2. 전체 선택자
+   - 모든 요소에 공통 스타일을 적용
+   - 예: * { margin:0; padding:0; box-sizing:border-box; }
+
+3. id와 class 선택자
+   - id는 #, class는 . 으로 선택
+   - id는 문서 내에서 고유, class는 여러 요소에서 공용 가능
+   - 예: #title { color:red; }  /  .highlight { background:yellow; }
+
+4. 혼합 선택자
+   - 태그, id, class를 함께 조합해서 사용 가능
+   - 예: div.box { border:1px solid gray; }
+   - 복수 선택: h1, h2, p { color: navy; }
+
+5. 속성 선택자
+   - 특정 속성을 가진 태그 선택
+   - 예: input[type="text"] { border:1px solid gray; }
+   - [속성^="값"], [속성$="값"], [속성*="값"] 등으로 세밀한 선택 가능
+
+6. 자손 / 후손 선택자
+   - 자손(>) : 바로 아래 단계만 선택
+   - 후손(공백) : 내부 모든 하위 요소 선택
+   - 예: #wrap > p { color:red; } / #wrap p { color:blue; }
+
+7. 동위 선택자
+   - 같은 부모를 가진 형제 요소를 선택
+   - + : 바로 다음 형제, ~ : 그 뒤의 모든 형제
+   - 예: h2 + p { color: red; } / h2 ~ p { font-size:13px; }
+
+8. 반응 선택자
+   - 사용자 동작에 반응하는 상태 선택
+   - :hover, :active, :focus 등
+   - 예: a:hover { color:orange; text-decoration:underline; }
+
+9. 상태 선택자
+   - form 요소의 상태에 따라 스타일 적용
+   - 예: input:checked, input:disabled, input:focus 등
+   - 예: input:focus { border-color:blue; }
+
+10. 구조 선택자
+   - 문서 구조(순서)에 따라 요소를 선택
+   - :first-child, :last-child, :nth-child(n)
+   - 예: li:nth-child(2) { color:red; }
+
+   (가로메뉴 버전)
+   - ul 안의 li를 가로 정렬: display:inline-block;
+   - a태그에 padding과 border 적용으로 메뉴 스타일 완성
+
+11. 문자 / 링크 / 부정 선택자
+   - 문자 선택자: ::first-letter, ::first-line 등
+   - 링크 선택자: a:link, a:visited, a:hover, a:active
+   - 부정 선택자: :not(선택자)
+   - 예: p:not(.notice) { color:gray; }

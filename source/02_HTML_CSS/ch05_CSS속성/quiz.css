@@ -1,0 +1,99 @@
+/* 페이지 초기화 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: purple;
+  font-weight: bold;
+  display: block;
+}
+
+li {
+  list-style: none;
+}
+
+#container {
+  width: 80%;
+  margin: 20px auto;
+  border: 1px solid gray;
+  padding: 10px;
+}
+
+#header {
+  background: yellow;
+  text-align: center;
+  padding: 20px;
+  font-weight: bold;
+  font-size: 20px;
+  border: 1px solid lightgray;
+}
+
+#nav {
+  text-align: center;
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid lightgray;
+}
+
+#nav p {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+#nav ul {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+#nav li {
+  background-color: pink;
+  padding: 10px 20px;
+}
+
+#nav li:first-child {
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+#nav li:last-child {
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+#section {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+#content {
+  flex: 3;
+  height: 250px;
+  border: 1px solid lightgray;
+  padding: 10px;
+  text-align: center;
+
+}
+
+#banner {
+  flex: 1;
+  height: 250px;
+  border: 1px solid lightgray;
+  padding: 10px;
+  text-align: center;
+}
+
+#footer {
+  background: yellow;
+  text-align: center;
+  padding: 20px;
+  font-weight: bold;
+  font-size: 20px;
+  margin-top: 10px;
+  border: 1px solid lightgray;
+}

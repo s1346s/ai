@@ -1,0 +1,64 @@
+📘 자바스크립트 기본문법·조건문·반복문 간단 정리
+
+1. 변수와 자료형
+- 선언: var, let, const
+- 자료형: string, number, boolean, object, undefined
+- typeof(값) → 자료형 확인
+
+2. 형변환
+- Number("10") → 10
+- parseInt("10점") → 10
+- isNaN(값) → 숫자인지 확인
+
+3. 복합대입연산자
+- +=, -=, *=, /=, %=
+
+4. 조건문 (if / else if / else)
+if(조건){ } else if(조건){ } else{ }
+
+5. 삼항연산자
+조건 ? 참일때 : 거짓일때
+
+6. switch문
+switch(값){
+  case 1: 실행; break;
+  case 2: 실행; break;
+  default: 실행;
+}
+
+7. Date 객체 예시
+const hour = new Date().getHours();
+if(hour<12){ ... } else { ... }
+
+8. confirm / prompt
+- confirm("질문") → true/false
+- prompt("질문") → 입력값(string)
+
+9. 반복문 기본형
+for(let i=0; i<10; i++){ 실행 }
+while(조건){ 실행 }
+do{ 실행 } while(조건)
+
+10. 중첩 for문
+for(let i=2;i<=9;i++){
+  for(let j=1;j<=9;j++){
+    console.log(`${i}x${j}=${i*j}`);
+  }
+}
+
+11. 배열 기본
+let arr = [1,2,3];
+arr.push(4);   // 추가
+arr.pop();     // 마지막 제거
+
+12. 배열 반복문
+for(let i=0; i<arr.length; i++){}
+for(let i in arr){}       // 인덱스
+for(let v of arr){}       // 값
+arr.forEach((v,i)=>{});   // 함수형 반복
+
+13. 요약
+- for문 : 일반 반복
+- for in : 인덱스 순회
+- for of : 값 순회
+- forEach : 배열만 사용

@@ -1,0 +1,22 @@
+1) 함수 기본 형태
+- 익명함수: 이름 없이 변수에 할당해 호출
+- 선언적 함수: function 이름(){} (호이스팅 적용)
+- 화살표 함수: () => {} (간결, this 바인딩 주의)
+- 내부함수: 함수 안에 선언된 함수, 클로저 형성
+- 콜백함수: 함수의 인자로 전달되는 함수, 비동기/반복에 활용
+
+2) 매개변수 & 반환
+- 기본값 매개변수: function f(a = 0){}
+- 가변 인자: function f(...args){} → 배열처럼 순회
+- 매개변수와 리턴값: 입력→처리→return으로 결과 전달
+- 합계 예제: 전달된 숫자들의 합 구하기(가변 인자/반복 연습)
+
+3) 배열 기본
+- 선언: const arr = [1,2,3]
+- 추가/삭제: push, pop, shift, unshift, splice
+- 순회: for, for...of, forEach, map, filter, reduce
+
+4) 타이머(비동기)
+- setTimeout: 지연 실행, ID 반환, clearTimeout(id)로 취소
+- setInterval: 주기 실행, clearInterval(id)로 중단
+- 콜백과 함께 비동기 흐름 체험

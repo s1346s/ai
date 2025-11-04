@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+  <title></title>
+  <script>
+    let cnt = 0 ; // 점수 입력 횟수
+    let right = 0; // 제대로된 숫자를 입력 횟수(0~100사이의 숫자)
+    let wrong = 0; // 제대로된 숫자를 입력하지 않은 횟수
+    let sum = 0; // 점수 누적
+
+      while(confirm("점수를 입력하시겠습니까?")){
+
+        let score = prompt("점수를 입력하세요 (0~100)");
+        cnt++;
+
+        let num = Number(score);
+
+        if(isNaN(num) || num < 0 || num > 100){
+            wrong++;
+        }else{
+            right++;
+            sum += num;
+        }
+    }
+    document.write("총 입력 횟수: " + cnt + "<br>");
+    document.write("정상 입력 횟수: " + right + "<br>");
+    document.write("비정상 입력 횟수: " + wrong + "<br>");
+    document.write("점수 합계: " + sum);
+
+  </script>
+</head>
+<body>
+</body>
+</html>

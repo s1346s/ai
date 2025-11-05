@@ -1,0 +1,69 @@
+1) 객체 기초  
+- 객체 선언: let person = {name:'홍길동', age:20}  
+- 속성 추가/삭제: obj.hobby='독서', delete obj.age  
+- 메소드 정의: eat:function(food){...} (this로 접근)  
+- toString 오버라이드: 객체를 문자열로 출력 형식 지정  
+
+2) 객체 배열  
+- 선언: let students=[{name:'김', kor:99,...},{...}]  
+- 메소드 추가: for문으로 getSum, getAvg 등 추가  
+- 출력: document.writeln(students[i]) → toString 자동 호출  
+
+3) 함수로 객체 생성  
+- 객체 반환 함수: function makeStudent(name, kor,...){return {...}}  
+- 반복되는 객체 생성 로직을 함수화하여 재사용성 향상  
+- toString 안에서 getSum(), getAvg() 호출해 정보 표시  
+
+4) 생성자 함수  
+- 형태: function Student(name, kor,...){this.name=name;...}  
+- 내부 메소드: 각 인스턴스가 독립적으로 가짐  
+- prototype 이용: 공통 메소드 정의로 메모리 절약  
+- 객체 생성: new Student('홍',99,81,80,95)  
+
+5) 클래스(ES6)  
+- 형태: class Student { constructor(...){...} getSum(){...} getAvg(){...} toString(){...} }  
+- prototype 기반 구조를 내부적으로 지원  
+- 문법 간결, 현대적이고 직관적  
+
+6) 비교 요약  
+- 객체리터럴: 간단하지만 재사용 어려움  
+- 함수반환: 함수로 객체 생성 가능  
+- 생성자함수: new 키워드, prototype 사용  
+- 클래스: 가장 최신 문법, 가독성 좋음  
+
+7) 문자열 내장함수  
+- str.length : 문자열 길이  
+- str.concat(추가문자열) : 문자열 연결  
+- str.substring(a, b) : a번째~b앞까지 추출  
+- str.substr(a, b) : a번째부터 b글자 추출  
+
+8) 정규표현식  
+- \d : 숫자 / \w : 영문+숫자 / . : 문자 1개  
+- {2,4} : 2~4회 반복 / ? : 0~1회 / + : 1회 이상  
+- test(): 포함 여부 확인 / match(): 패턴 일치 확인  
+- 이메일 검사: /^\w+@\w+(\.\w+){1,2}$/  
+
+9) 배열 내장함수  
+- join(): 배열 → 문자열 변환  
+- slice(), [...arr], Array.from(): 깊은 복사  
+- sort(): 오름차순 정렬 (ASCII 코드 기준)  
+- reverse(): 순서 반전  
+
+10) 회원가입 유효성 검사  
+- 이름: /^[가-힣a-zA-Z]{2,}$/ → 2글자 이상, 숫자·특수문자 불가  
+- 이메일: /^[\w.-]+@[\w.-]+\.[A-Za-z]{2,}$/  
+- 비밀번호: 대소문자+숫자+특수문자 포함 4자리 이상  
+- 비밀번호 확인: pw와 pwChk 일치 여부 검사  
+
+11) 객체배열 정렬(sort)  
+- students.sort(): toString() 기준 ascii 오름차순 정렬  
+- 사용자 정의 정렬: (a,b)=>b.getSum()-a.getSum() → 총점 기준 내림차순  
+- 상위 n개: students.slice(0,n) 사용  
+
+12) Date 내장함수  
+- new Date(): 현재 날짜와 시간  
+- toLocaleString(): 날짜+시간 문자열 출력  
+- toLocaleDateString(), toLocaleTimeString(): 날짜/시간 분리 출력  
+- new Date(2025,8,11,9,30,0): 특정 날짜 생성 (월은 0부터 시작)  
+- getTime(): 밀리초 단위 시간값 반환  
+- 날짜 차이 계산: (now - other) / (1000*60*60*24)

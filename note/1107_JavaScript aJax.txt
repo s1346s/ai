@@ -1,0 +1,50 @@
+1) jQuery 기초 (1_html_text.html)  
+- $(document).ready(function(){ ... }) : 문서가 준비되면 실행  
+- $('선택자').action() : 선택자 기반으로 요소 조작  
+- html(), text(), val()  
+  • html() : HTML 코드 삽입/가져오기  
+  • text() : 텍스트만 삽입/가져오기  
+  • val() : 입력 상자의 value 설정/가져오기  
+- click() : 클릭 이벤트 처리  
+예시) $('#p1').click(function(){ $(this).html('<b>click 했네</b>').css('color','red'); });  
+
+2) jQuery 내용 삽입 및 읽기 (2_html_text_val.html)  
+- html() : 요소에 HTML 코드 삽입  
+- text() : 요소에 텍스트 삽입  
+- val() : input 박스에 값 설정  
+- click 이벤트로 값 읽기  
+예시)  
+$('#msg').html('<h1>Hello, jQuery</h1>');  
+$('input[name=msg]').val('Hello, js');  
+$('button').click(function(){  
+  alert($('#msg').text() + $('input[name=msg]').val());  
+});  
+
+3) keyup 이벤트 (3_keyup.html)  
+- keyup : 키보드에서 손을 뗄 때 실행  
+- 비밀번호 일치 검사  
+  • $('input[name=pw], input[name=pwChk]').keyup() : 두 입력값 비교  
+  • 일치 시: '두 비밀번호가 일치합니다'  
+  • 불일치 시: '비밀번호가 일치하지 않습니다'  
+- form.submit() : 비밀번호 확인 후 제출 허용  
+
+4) AJAX GET 기초 (4_ajax_get.html)  
+- $.ajax() 기본형식  
+  $.ajax({  
+    url: '요청경로',  
+    type: 'get',  
+    data: {id:입력값},  
+    dataType: 'html',  
+    success: function(data){ 성공 시 실행 },  
+    error: function(code){ 실패 시 실행 }  
+  });  
+- 입력값에 따라 idConfirmNonExists.html 호출  
+- 결과를 span 영역에 출력  
+
+5) AJAX 종합 예제 (5_ajax.html)  
+- 버튼 클릭 또는 keyup 시 AJAX 요청 수행  
+- 아이디가 3글자 미만 → '아이디는 3글자 이상' 출력  
+- 3글자 이상 → AJAX로 idConfirmNonExists.html 호출  
+- $.ajax()의 success 콜백으로 결과 출력  
+- idConfirmExists.html / idConfirmNonExists.html 페이지를 통해  
+  ‘중복된 ID입니다’ / ‘사용가능한 ID입니다’ 결과 표시  

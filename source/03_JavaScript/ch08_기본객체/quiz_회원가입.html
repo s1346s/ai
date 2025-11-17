@@ -7,7 +7,7 @@
     table {width:350px; margin:20px auto; padding:20px 10px;}
     table, input[type='text'], input[type='password'] {
         border: 1px solid #385d81;
-outline: 1px solid #385d81;
+        outline: 1px solid #385d81;
         padding: 2px;
     }
     input[type='submit'], input[type='reset'], input[type='button'], button{
@@ -21,46 +21,77 @@ outline: 1px solid #385d81;
     td, th { padding:5px 10px; text-align:center;}
   </style>
   <script>
-        function joinCheck() {
-      const f = document.frm; 
-      const name = f.name.value.trim();
-      const mail = f.mail.value.trim();
-      const pw = f.pw.value.trim();
-      const pwChk = f.pwChk.value.trim();
+    const joinCheck = () => {
+      // 정규표현식들
+      let patternNum = /[0-9]/; 
+      let patternEng = /[a-zA-Z]/; 
+      let patternSpe = /[~`!@#$%^&*()_\-+=\|\\\[\]{}'":;?\/<>,\.]/; 
+      let patternMail = /^\w+@\w+(\.\w+){1,2}$/; // 메일 패턴
+      //let patternName = /^[가-힣a-zA-Z]{2,}$/; // 이름 패턴
 
-      // 이름 검사
-      const nameReg = /^[가-힣a-zA-Z]{2,}$/;
-      if (!nameReg.test(name)) {
-        alert("이름은 2글자 이상이며 숫자/특수문자 불가합니다");
-        f.name.focus();
+      // 입력 상자에서 입력받은 내용에 양쪽 space 제거
+      let name = frm.name.value.trim();
+      let mail = frm.mail.value.trim();
+      let pw   = frm.pw.value.trim();
+      let pwChk = frm.pwChk.value.trim();
+
+      // 비밀번호 유효성 부분의 메일 받은 내용
+      // patternPW = [/[0-9]+/, 
+      //             /[a-zA-Z]+/, 
+      //             /[~`!@#$%^&*()_\-+=\|\\\[\]{}'":;?\/<>,\.]+/,
+      //             /.{4,}/];
+      // missing = ['숫자포함 ', '알파벳포함 ', '특수문자포함 ', '4자이상'];
+      // alertMsg = '';
+      // for(let idx in patternPW){
+      //   if(!patternPW[idx].test(pw)){
+      //     alertMsg += missing[idx];
+      //   }
+      // }
+      // if(alertMsg){
+      //   alert(`비밀번호는 ${alertMsg}입니다`);
+      //   frm.pw.focus();
+      //   return false;
+      // }
+      // 이름, 메일, 비밀번호 순 유효성 검증
+      // 방법1
+      // if(!name.match(patternName)){
+      //   alert('2글자 이상 이름형식이 아닙니다');
+      //   frm.name.focus();
+      //   return false;
+      // }
+      // 방법2
+      if(!name){
+        alert('이름은 필수 입력사항입니다');
+        frm.name.focus();
         return false;
-      }
-
-      // 이메일 검사
-      const mailReg = /^[\\w.-]+@[\\w.-]+\\.[A-Za-z]{2,}$/;
-      if (!mailReg.test(mail)) {
-        alert("이메일 형식이 올바르지 않습니다.");
-        f.mail.focus();
+      }else if(patternSpe.test(name) || patternNum.test(name)){
+        alert('이름에 특수문자나 숫자가 포함될 수 없습니다.');
+        frm.name.focus()
         return false;
-      }
-
-      // 비밀번호 검사
-      const pwReg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*]).{4,}$/;
-      if (!pwReg.test(pw)) {
-        alert("비밀번호는 대문자, 소문자, 숫자, 특수문자 포함 4자리 이상이어야 합니다.");
-        f.pw.focus();
+      }else if(name.length<2){
+        alert('이름은 2글자 이상입니다');
+        frm.name.focus();
         return false;
-      }
-
-      // 비밀번호 일치 검사
-      if (pw !== pwChk) {
-        alert("비밀번호가 일치하지 않습니다.");
-        f.pwChk.focus();
+      }else if(mail && !mail.match(patternMail)){
+        // 메일을 입력하지 않거나, 입력한다면 메일 형식에 맞아야 함
+        // 메일을 입력하고, 메일패턴이 일치지되지 않으면 if 조건 참
+        alert('메일 형식을 확인하세요');
+        frm.name.focus();
         return false;
+      }else if(!pw){
+        alert('비밀번호는 필수 입력사항입니다');
+        frm.pw.focus();
+        return false;
+      }else if(pw!=pwChk){
+        alert('비밀번호가 일치하지 않습니다');
+        frm.pw.focus();
+        return false;
+      }else if(!patternNum.test(pw) || !patternEng.test(pw) ||
+              !patternSpe.test(pw) || pw.length <4 ){
+        alert('비밀번호는 알파벳, 숫자, 특수문자를 포함한 4글자 이상입니다');
+        frm.name.focus();
+        return false;        
       }
-
-      alert("회원가입이 완료되었습니다.");
-      return true; 
     }
   </script>
 </head>
@@ -97,4 +128,3 @@ outline: 1px solid #385d81;
   </form>
 </body>
 </html>
-

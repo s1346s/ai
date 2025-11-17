@@ -1,99 +1,63 @@
-/* 페이지 초기화 */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-a {
-  text-decoration: none;
-  color: purple;
+/***** 페이지 초기화 *****/
+*{margin:0; padding:0;}
+a{
+  text-decoration: none; 
+  color:purple;
   font-weight: bold;
   display: block;
 }
-
-li {
-  list-style: none;
-}
-
-#container {
-  width: 80%;
-  margin: 20px auto;
-  border: 1px solid gray;
-  padding: 10px;
-}
-
-#header {
-  background: yellow;
-  text-align: center;
-  padding: 20px;
-  font-weight: bold;
-  font-size: 20px;
+li{list-style: none;}
+div{
   border: 1px solid lightgray;
-}
-
-#nav {
+  margin: 5px; padding: 5px;
   text-align: center;
-  margin: 10px 0;
-  padding: 10px;
-  border: 1px solid lightgray;
 }
-
-#nav p {
-  margin-bottom: 10px;
-  font-weight: bold;
+/***** 페이지 전체를 가운데로 *****/
+#container{
+    width:800px; margin:0 auto;
 }
-
+/***** #header *****/
+#header{
+  line-height: 100px;
+  background-color: yellow;
+}
+/***** #nav *****/
+#nav p{ height:40px; line-height: 40px;}
 #nav ul {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
+  width:700px; margin: 0 auto;
+  overflow: hidden;
 }
-
-#nav li {
+#nav ul li{
+  float: left;
+  line-height: 50px;
   background-color: pink;
-  padding: 10px 20px;
+  /* margin: 0.5%;  width:19%;  */
+  margin: 2px;
+  width:136px; /* 700/5=140px */
 }
-
-#nav li:first-child {
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
+#nav ul li:first-child{
+  border-radius: 20px 0 0 20px;
 }
-
-#nav li:last-child {
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
+#nav ul li:last-child{
+  border-radius: 0 20px 20px 0;
 }
-
-#section {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
+/***** #section *****/
+#section{ 
+  overflow: hidden;
+  /* 전체 800px에서 margin, padding, border 뺀, width는 778px됨 */
 }
-
-#content {
-  flex: 3;
-  height: 250px;
-  border: 1px solid lightgray;
-  padding: 10px;
-  text-align: center;
-
+#section #content{
+  float: left;
+  width: 578px; /* 578 + 10(좌우margin) + 10(좌우padding) + 2(좌우border)=600필요*/
+  height: 200px;
 }
-
-#banner {
-  flex: 1;
-  height: 250px;
-  border: 1px solid lightgray;
-  padding: 10px;
-  text-align: center;
+#section #banner{
+  float: left;
+  width: 154px; /*176px필요(margin,padding,border)*/
+  height: 200px;  
 }
-
-#footer {
-  background: yellow;
-  text-align: center;
-  padding: 20px;
-  font-weight: bold;
-  font-size: 20px;
-  margin-top: 10px;
-  border: 1px solid lightgray;
+/***** #footer *****/
+#footer{
+  line-height: 100px;
+  background-color: yellow;
 }

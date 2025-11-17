@@ -1,0 +1,71 @@
+[SELECT 정리]
+
+1) SELECT 기본
+- SELECT 컬럼 FROM 테이블
+- SELECT * : 모든 열 조회
+- DESC 테이블 : 테이블 구조 확인
+
+2) 특정 열, 별칭
+- SELECT EMPNO, ENAME FROM EMP
+- 컬럼 별칭: AS "별칭" 또는 컬럼명 별칭
+
+3) WHERE 조건
+- 비교연산자: =, !=, <>, >, <
+- 문자/날짜 비교 가능
+- 예: WHERE SAL = 3000
+
+4) 논리연산자
+- AND, OR, NOT
+- 예: SAL BETWEEN 2000 AND 3000
+- 날짜 범위 검색 가능
+
+5) 산술연산, NVL
+- SAL*12
+- NVL(COMM, 0)
+- 연봉 = SAL*12 + NVL(COMM,0)
+
+6) 문자열 연결
+- ENAME || 'text' || JOB
+
+7) DISTINCT
+- 중복 제거
+- SELECT DISTINCT JOB FROM EMP
+
+8) SQL 연산자
+- BETWEEN A AND B
+- IN (값들)
+- LIKE ('%','_')
+- IS NULL / IS NOT NULL
+
+9) ORDER BY 정렬
+- ORDER BY SAL
+- ORDER BY SAL DESC, HIREDATE DESC
+
+
+[JOIN 정리]
+
+JOIN: 두 개 이상의 테이블을 연결하여 조회
+
+1) EQUI JOIN (동등 조인)
+- 공통 컬럼이 같을 때 조인
+SELECT *
+FROM EMP E, DEPT D
+WHERE E.DEPTNO = D.DEPTNO;
+
+2) NON-EQUI JOIN (비동등 조인)
+- BETWEEN 등 동등 비교 없이 조인
+SELECT ENAME, SAL, GRADE
+FROM EMP, SALGRADE
+WHERE SAL BETWEEN LOSAL AND HISAL;
+
+3) SELF JOIN
+- 같은 테이블끼리 조인 (사원-상사)
+SELECT W.ENAME, M.ENAME
+FROM EMP W, EMP M
+WHERE W.MGR = M.EMPNO;
+
+4) OUTER JOIN
+- 조건에 맞지 않는 행도 포함
+SELECT W.ENAME, NVL(M.ENAME,'없음')
+FROM EMP W, EMP M
+WHERE W.MGR = M.EMPNO(+);

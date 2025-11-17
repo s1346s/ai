@@ -1,0 +1,28 @@
+1) SELECT 기본 형태
+- SELECT * FROM 테이블 : 모든 열 조회
+- 특정 열 조회: SELECT 열1, 열2 FROM 테이블
+- 열 별칭: 열이름 AS "별칭" 또는 열이름 별칭
+- 테이블 구조 확인: DESC 테이블명
+
+2) WHERE 조건절
+- 비교연산자: =, !=, <>, >, <, >=, <=
+- 문자·숫자·날짜 모두 비교 가능
+- 논리연산자: AND, OR, NOT
+- 예시:
+  - WHERE SAL = 3000
+  - WHERE SAL BETWEEN 2000 AND 3000
+  - WHERE ENAME < 'D'
+  - WHERE HIREDATE > '81/02/01'
+
+3) 산술연산자
+- SELECT, WHERE, ORDER BY에서 사용 가능
+- 예: SAL * 12, SAL + COMM
+- NVL(값, 대체값) : NULL 처리
+  예: SAL*12 + NVL(COMM, 0)
+
+4) 연결연산자
+- 문자열 결합: ||
+  예: ENAME || '은(는)' || JOB
+
+5) 중복 제거
+- SELECT DISTINCT 열 FROM 테이블

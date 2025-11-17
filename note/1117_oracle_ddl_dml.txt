@@ -1,0 +1,44 @@
+[Oracle DDL / DML 간단 이론 정리]
+
+1. SQL 종류
+- DDL: 구조 정의 (CREATE, DROP, ALTER)
+- DML: 데이터 조작 (INSERT, UPDATE, DELETE, SELECT)
+- DCL: 권한 제어 (GRANT, REVOKE)
+- TCL: 트랜잭션 (COMMIT, ROLLBACK)
+
+2. 주요 데이터 타입
+- NUMBER(p,s): 숫자
+- VARCHAR2(n): 가변 문자
+- DATE: 날짜
+- CLOB/BLOB: 대용량 데이터
+
+3. CREATE TABLE 기본형
+CREATE TABLE 테이블명(
+  컬럼명 데이터타입 [제약조건]
+);
+
+4. 제약조건 종류
+- PRIMARY KEY: 기본키(유일+NULL 불가)
+- FOREIGN KEY: 다른 테이블 참조
+- NOT NULL: NULL 금지
+- UNIQUE: 중복 금지
+- CHECK: 조건 제한
+- DEFAULT: 기본값
+
+5. INSERT
+INSERT INTO 테이블명 VALUES (...);
+INSERT INTO 테이블명(컬럼...) VALUES(...);
+INSERT INTO 테이블명 SELECT ...;
+
+6. UPDATE
+UPDATE 테이블명 SET 컬럼=값 WHERE 조건;
+
+7. DELETE
+DELETE FROM 테이블명 WHERE 조건;
+
+8. DROP TABLE
+DROP TABLE 테이블명;
+
+9. 트랜잭션
+- COMMIT: 변경사항 확정
+- ROLLBACK: 변경 취소

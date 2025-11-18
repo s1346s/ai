@@ -1,0 +1,19 @@
+1) DCL
+- create user, grant, drop user로 계정 생성/권한 관리
+
+2) DDL
+- show databases, create database, use DB
+- create table로 PK, NOT NULL, UNIQUE, CHECK, DEFAULT 설정
+- MySQL 타입: int, float, double, varchar, text, date 등
+
+3) AUTO_INCREMENT & FK
+- auto_increment로 시퀀스 대체
+- foreign key(mcode) references major(mcode)
+- FK 위반 시 INSERT 불가
+
+4) JOIN
+- RIGHT OUTER JOIN: 학과는 다 나오고 학생 없으면 NULL
+
+5) DML 실습 테이블
+- division(부서), personal(사원)
+- personal.dno → division.dno FK

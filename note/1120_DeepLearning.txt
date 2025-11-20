@@ -1,0 +1,66 @@
+1) 머신러닝/딥러닝 개념
+- ML: 데이터에서 규칙 학습
+- DL: 신경망을 깊게 쌓아 복잡한 규칙 학습
+- 목적: 입력 → 예측 자동 생성
+
+2) ML 종류
+- 지도학습: 입력(X) + 정답(y)
+  · 회귀(Regression): y=숫자
+  · 분류(Classification): y=범주
+- 비지도학습: 정답 없음 → 군집화
+- 강화학습: 보상 기반 학습
+
+3) 회귀분석(Regression)
+- 목표: 연속형 숫자 예측(온도, 집값 등)
+- 모델 출력: 실수 1개
+- 손실함수: MSE, RMSE, MAE
+- 예: 섭씨 → 화씨
+
+4) 분류분석(Classification)
+- 목표: 클래스 예측
+- 이진/다중 분류
+- 출력: softmax 확률 벡터
+- 전처리: 원핫인코딩(to_categorical)
+
+5) 딥러닝 학습 절차
+- 데이터 확보
+- 전처리(정규화, train/val/test split, 원핫인코딩)
+- 모델 구성(Input, Dense)
+- compile(loss, optimizer, metrics)
+- fit(epochs, batch, validation)
+- evaluate, predict
+- model.save()
+
+6) 회귀 실습 핵심(노이즈 없음)
+- 입력: 0~99
+- 타겟: 섭씨→화씨
+- 정규화: /100
+- 모델: Input(1) → Dense(1)
+- y = Wx + b 직선 학습
+
+7) 회귀 실습(노이즈 있음)
+- 평균 0, 표준편차 0.1 noise 추가
+- 딥러닝은 "완벽한 선"이 아니라 "가장 덜 틀리는 선"을 찾음
+
+8) 다중 분류 실습 핵심
+- x_train: 1~9 반복
+- y_train: 2~18
+- 원핫인코딩: to_categorical
+- 모델:
+  · Dense(38, sigmoid)
+  · Dense(64, elu)
+  · Dense(32, elu)
+  · Dense(19, softmax)
+- 손실함수: categorical_crossentropy
+
+9) 활성화 함수
+- sigmoid: 0~1
+- tanh: -1~1
+- relu: 0 또는 양수
+- elu: relu 개선
+- softmax: 다중분류 확률
+
+10) 핵심 한 줄 요약
+- 회귀: 숫자 예측
+- 분류: 클래스 확률 예측
+- 딥러닝은 W와 b(가중치+절편) 자동 학습

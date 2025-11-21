@@ -1,0 +1,79 @@
+[군집화(Clustering) – K-Means 알고리즘]
+
+1) 군집화란?
+- 비지도학습(정답 없음)
+- 특징(키/몸무게 등)을 기준으로 비슷한 데이터끼리 묶는 방법
+- 대표적인 알고리즘: K-Means
+
+2) K-Means 동작 원리
+(1) K개의 기준점(centroid) 초기화
+(2) 각 데이터를 가장 가까운 기준점으로 배정(거리 계산 → 보통 유클리드 거리)
+(3) 배정된 그룹의 평균값으로 기준점을 이동
+(4) 기준점 변화가 거의 없어질 때까지 반복
+
+3) 핵심 함수·개념
+- 거리 계산(dist):
+  dist(a,b) = √((a₀-b₀)² + (a₁-b₁)²)
+- group0, group1: 기준점 0·1에 가까운 데이터 묶음
+- 기준점 업데이트:
+  group 평균(mean) → 새로운 centroid
+
+4) K-Means 특징
+- 초기 기준점 선택에 따라 결과가 달라짐
+- 반복할수록 기준점이 안정화(convergence)됨
+- sklearn KMeans
+  - model.fit(data) : 학습
+  - model.cluster_centers_ : 기준점
+  - model.labels_ : 각 데이터가 속한 그룹
+
+
+[TensorFlow v1 기본 개념]
+
+1) TensorFlow란?
+- 데이터 흐름 그래프 기반의 수치 계산 라이브러리
+- 노드(node): 연산
+- 엣지(edge): 텐서(tensor) 데이터 전달
+- 실행은 Session으로 수행(sess.run())
+
+2) TF v1 필수 요소
+- tf.constant() : 상수 노드
+- tf.Variable() : 학습되는 값(W, b)
+- tf.placeholder() : 외부 입력용 노드
+- tf.Session() : 그래프 실행 환경
+- sess.run() : 실제 계산 수행
+- tf.global_variables_initializer() : 변수 초기화
+
+3) 회귀분석(Linear Regression) 기본 구조
+Hypothesis(H) = W*x + b
+Cost(MSE) = mean((H - y)²)
+
+4) 경사하강법(Gradient Descent)
+optimizer = tf.train.GradientDescentOptimizer(lr)
+train = optimizer.minimize(cost)
+→ cost가 최소가 되도록 W, b를 업데이트
+
+5) 학습 과정
+- 그래프 정의(H, cost, optimizer)
+- Session 생성
+- 변수 초기화
+- 반복문으로 train 실행
+- 결과(W, b)로 예측 가능
+
+6) placeholder 활용
+- feed_dict 사용:
+  sess.run(H, feed_dict={x:[입력값]})
+
+
+[스케일 조정(정규화·표준화)]
+
+1) 정규화(Normalization, 0~1 변환)
+(X - Xmin) / (Xmax - Xmin)
+→ MinMaxScaler 사용 가능
+
+2) 표준화(Standardization)
+(X - 평균) / 표준편차
+→ StandardScaler 사용 가능
+
+3) 스케일 조정 필요성
+- 데이터 크기 차이가 클 때 경사하강법이 잘 안됨
+- 스케일 조정 시 학습 속도 향상 및 정확도 증가

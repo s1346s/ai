@@ -1,0 +1,113 @@
+MNIST 분류 실습 
+
+1. 데이터 불러오기 및 구조 확인
+
+* 라이브러리에서 MNIST 데이터셋 로드: mnist.load_data()
+* 형식: X는 28x28 흑백 이미지, y는 0~9 숫자 레이블
+* CSV 파일로도 로드 가능: np.loadtxt()
+* 이미지 시각화 위해 28x28 형태로 reshape
+* OpenCV로 흑백 이미지 읽기: cv2.imread(path, cv2.IMREAD_GRAYSCALE)
+
+2. 데이터 전처리
+   (1) 학습/검증/테스트 분리
+
+* Train 60000개 → 학습 50000, 검증 10000
+* Test 10000 그대로 사용
+
+(2) 입력 데이터(X) 전처리
+
+* (28,28)을 784차원 벡터로 변환
+* float32 형변환
+* 0~255 픽셀값을 0~1 범위로 스케일 조정 (/255.0)
+
+(3) 타겟 데이터(y) 전처리 – 원핫인코딩
+
+* to_categorical(y, 10)
+* 예: 2 → [0,0,1,0,0,0,0,0,0,0]
+
+(4) 수업시간 단축용 샘플링
+
+* Train 50000 → 700개
+* Val 10000 → 300개
+* np.random.choice() 비복원추출
+
+3. DNN 모델 구성
+   (1) 기본 구조
+   Input(784) → Dense(hidden) → (필요 시 Dropout) → Dense(10, softmax)
+
+(2) 활성화 함수
+
+* ReLU: 가장 안정적이며 널리 사용
+* LeakyReLU(alpha=0.01): ReLU의 dead 문제 보완
+* softmax: 다중분류에서 확률 출력
+
+(3) 간단 모델 예시
+Dense(2)
+LeakyReLU
+Dense(10, softmax)
+→ 정확도 약 0.42
+
+(4) 성능 개선 모델 예시
+Dense(1024, relu)
+Dropout(0.3)
+Dense(512, relu)
+Dropout(0.3)
+Dense(128) + LeakyReLU
+Dropout(0.3)
+Dense(10, softmax)
+→ 약 98% 정확도
+
+4. 모델 학습 설정
+   model.compile(
+   loss='categorical_crossentropy',
+   optimizer='adam',
+   metrics=['accuracy']
+   )
+
+* loss: 다중분류 → categorical_crossentropy
+* optimizer: adam
+* metrics: accuracy
+
+5. 모델 학습
+   model.fit(
+   train_X, train_Y,
+   epochs=n, batch_size=100,
+   validation_data=(val_X, val_Y)
+   )
+
+* epoch: 전체 반복 횟수
+* batch_size: 한 번 업데이트에 사용되는 데이터 수
+* validation: 과적합 여부 확인
+
+학습과정 시각화: loss/accuracy 그래프 비교
+
+6. 테스트셋 평가
+   model.evaluate(test_X, test_Y)
+   → loss, accuracy 출력
+
+교차표(pd.crosstab)로 실제값/예측값 비교 가능
+성능 지표로 최종 모델 품질 판단
+
+7. 성능 개선 방법
+
+* 데이터 수 증가
+* Dense layer 수 또는 unit 증가
+* ReLU 계열 활성화 함수 사용
+* Dropout 추가하여 과적합 방지
+* epoch 조절
+* optimizer 변경 또는 학습률 조절
+
+8. 콜백 함수 활용
+   (1) Custom Callback
+
+* 특정 epoch마다 로그 출력 가능
+
+(2) EarlyStopping
+
+* 기준 모니터링 지표(val_loss 또는 val_accuracy)가 개선되지 않을 때 조기 종료
+* patience로 몇 번까지 버틸지 설정
+
+(3) ModelCheckpoint
+
+* val_accuracy(또는 val_loss)가 개선될 때만 모델 자동 저장
+* 'save_best_only=True' 옵션으로 최고 성능 모델만 저장됨

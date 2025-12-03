@@ -1,0 +1,138 @@
+RNN
+
+[1] RNN(Recurrent Neural Network) 개요
+
+* 순서가 중요한 데이터(텍스트, 음성, 주가, 시계열)에 적합한 신경망
+* 번역, 음성인식, 주가예측, 농수산물 가격예측 등에서 활용
+* 문맥 정보를 이전 단계의 은닉상태(hidden state)에 저장하며 학습함
+
+[2] 텍스트 토큰화와 정수 인코딩(Tokenization)
+
+* Keras Tokenizer 로 텍스트를 학습해 단어 사전을 생성함
+* texts_to_sequences 로 문장을 정수 시퀀스로 변환함
+* 사전에 없는 단어는 빈 리스트([])가 생성되어 입력이 0 패딩으로만 구성됨
+* 학습된 word_index 를 통해 단어 → 숫자 매핑 확인 가능
+
+[3] N-gram 학습 데이터 생성
+
+* 한 문장을 토큰화한 뒤,
+  예: `[2, 3, 1, 4, 5]`
+  → `['경마장에 있는', '경마장에 있는 말이', ...]` 형태의 누적 시퀀스를 생성
+* 모든 문장을 대상으로 시작·끝 위치를 바꿔가며 N-gram을 구축
+* 최종적으로 RNN 학습에 사용될 여러 길이의 시퀀스를 확보
+
+[4] 시퀀스 패딩(padding)
+
+* pad_sequences 로 모든 문장의 길이를 동일하게 맞춤
+* padding='pre' 사용 → 앞쪽을 0으로 채워 정렬
+* RNN 학습 입력 형태가 일정해짐
+* X(입력): 마지막 단어 제외
+* y(타깃): 시퀀스의 마지막 단어
+
+[5] 원-핫 인코딩과 단어 수 설정
+
+* y(타깃 단어)를 to_categorical 로 원-핫 인코딩
+* vocab_size = 전체 단어 수 + 1
+* Embedding 층의 input_dim = vocab_size 로 지정
+
+[6] RNN 모델 구성
+
+* Embedding: 정수 인덱스를 10차원 벡터로 변환
+* SimpleRNN: 은닉노드 32개
+* Dense(softmax): 다음 단어를 확률로 예측
+* 파라미터 수 = (input_dim + hidden_dim) * hidden_dim + bias
+* loss='categorical_crossentropy', optimizer='adam' 로 학습
+
+[7] 모델 학습 및 성능 시각화
+
+* epochs=300 으로 학습
+* 학습 후 loss, accuracy 를 Matplotlib 으로 그래프 출력
+* 학습이 잘 진행되면 손실 감소·정확도 상승 확인 가능
+
+[8] 다음 단어 예측(inference)
+
+* 입력 문장을 토큰화 → 패딩 → 모델에 전달
+* argmax 로 가장 확률 높은 단어 인덱스 선택
+* word_index 를 이용해 숫자를 다시 단어로 변환
+* 예: "경마장에 있는 말이" → 모델 출력: "뛰고"
+
+[9] 문장 생성(sentence generation)
+
+* 시작 단어를 입력하면
+  RNN 이 다음 단어를 예측하여 이어붙이는 방식
+* 예:
+  "경마장에" → "있는"
+  "경마장에 있는" → "말이"
+  "경마장에 있는 말이" → "뛰고"
+  → 최종 문장 생성 가능
+
+LSTM/GRU 기반 IMDb 영화평 감성분석
+
+[1] IMDb 영화평 데이터 개요
+
+* IMDb 50,000개 감상평(Train 25k / Test 25k)
+* 타깃: **0=부정 / 1=긍정**
+* 리뷰는 이미 정수 인덱스로 토큰화된 상태로 제공됨
+
+[2] 하이퍼파라미터 설정
+
+*MY_WORDS=10000** : 사용할 최다 단어 수
+*MY_LENGTH=80** : 리뷰 길이를 80단어로 통일
+*MY_EMBED=32** : 임베딩 출력 차원
+*MY_HIDDEN=64** : LSTM 은닉노드 수
+*MY_EPOCH=10, MY_BATCH=200** : 학습 반복 횟수 / 배치 크기
+
+[3] 데이터 불러오기
+
+* imdb.load_data(num_words=10000) 로 상위 10,000개 단어만 사용
+* 데이터 형태: (25000,)
+* 긍·부정 각각 12,500개로 균형 잡힌 데이터셋
+* 리뷰 샘플은 정수 시퀀스로 구성됨
+
+[4] 단어 인덱스 매핑 (문자 ↔ 정수)
+
+* word_to_id : 단어 → 정수
+* id_to_word : 정수 → 단어
+* 1: 시작토큰, 2: OOV(사전 외), 3: padding
+* 영화평 원문 복원 함수: decoding()
+
+[5] 리뷰 길이 분석
+
+* 원본 리뷰 길이: 최소 11단어 ~ 최대 2494단어
+* pad_sequences 로 모든 리뷰 길이를 **80단어로 통일**
+
+* truncating='post': 긴 경우 뒤를 자름
+*  padding='post': 짧은 경우 뒤에 0 붙임
+
+[6] 최종 데이터 형태
+
+* X_train: (25000, 80)
+* X_test : (25000, 80)
+* 리뷰가 자연어로 복구(decoding) 가능 → 분석 및 확인 용이
+
+[7] LSTM 모델 구성
+
+* Embedding(10000 → 32차원)
+* LSTM(64 units)
+* Dense(1, sigmoid) → 이진 분류
+* 총 파라미터수: 344,897개
+
+[8] 모델 학습 설정 및 훈련
+
+* loss='binary_crossentropy'
+* optimizer='adam'
+* metrics=['acc']
+* validation_split=0.2
+* 약 68초 소요
+
+학습 결과 예시:
+
+* Train acc: ~97%
+* Val acc: ~78~81%
+* 과적합 경향 확인됨(Val_loss 증가 추세)
+
+[9] 학습 평가 및 시각화
+
+* hist.history 에서 loss / acc / val_loss / val_acc 확인
+* matplotlib 을 통해 그래프 시각화
+* 훈련 정확도는 상승, 검증 정확도는 이후 감소 → 과적합 패턴

@@ -1,0 +1,31 @@
+[1] Chat Completions (GPT 텍스트 생성)
+
+* GPT 모델에게 **대화 메시지(messages)**를 보내 텍스트 생성
+* 역할 구조: **system / user / assistant**
+* 스트리밍 지원 → 실시간 출력 가능
+* JSON 출력, 요약, 번역, 채팅봇 등 폭넓게 활용
+* 소형 모델(gpt-4.1-nano) → 빠르고 저렴 / 대형 모델(gpt-4o) → 고성능
+
+[2] Whisper (음성 → 텍스트 변환)
+
+* 음성을 텍스트로 변환하는 **ASR(Automatic Speech Recognition)**
+* Transcription: 원어 그대로 필사
+* Translation: 영어로 번역
+* 다국어 자동 감지 + `language="ko"` 등 강제 지정 가능
+* SRT/VTT 자막 출력, 세그먼트 단위 타임스탬프 제공
+
+[3] DALL-E (텍스트 → 이미지 생성 / 이미지 편집)
+
+* 텍스트 프롬프트로 이미지 생성
+* DALL-E 2 → 256/512/1024 해상도, 여러 장 출력
+* DALL-E 3 → 더 고품질, n=1만 가능, revised_prompt 제공
+* Inpainting(부분 수정) / Outpainting(확장) 지원
+* 편집 시 **원본 + 마스크 이미지** 필요
+
+[4] TTS (텍스트 → 음성 생성)
+
+* 텍스트를 사람 목소리로 읽어주는 API
+* 모델: `tts-1`(빠름), `tts-1-hd`(고품질)
+* voice: nova, onyx, shimmer 등 여러 목소리 제공
+* speed=0.25~4.0 → 발음 속도 조절
+* mp3로 저장하여 재생 가능

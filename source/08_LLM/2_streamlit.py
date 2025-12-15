@@ -1,5 +1,5 @@
-# vscode에서 ctrl+shift+p -> 인터프리터 선택
-# 실행 ctrl+j : powershell 터미널 -> command prompt 에서 streamlit run 2_streamlit.py
+# vscode에서 ctrl+shift+p -> 인터프리터 선택(llm)
+# 실행 ctrl+j : powsershell 터미널 -> command prompt에서 streamlit run 2_streamlit.py
 import streamlit as st
 st.set_page_config(page_title="첫번째 데모")
 
@@ -12,7 +12,7 @@ st.write("write함수를 이용하여 텍스트 표시")
 st.markdown('---')
 message = st.text_area("요약 글을 입력하세요")
 if st.button("요약"):
-    st.info("버튼 클릭했네")
+  st.info("버튼 클릭했네")
 
-if prompt := st.chat_input("챗입력 받기"):
-    st.chat_message("user").write(prompt)
+if prompt := st.chat_input("쳇입력 받기"):
+  st.chat_message("assistant").write(prompt)

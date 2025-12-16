@@ -1,0 +1,102 @@
+[1] 머신러닝 개요
+
+* 머신러닝: **학습을 통해 작업 성능을 향상시키는 기술**
+* 목적: 예측, 분류, 군집, 차원축소
+
+머신러닝 도구
+
+* EDA: Pandas, NumPy, Matplotlib, Seaborn
+* 모델링: scikit-learn, statsmodels, scipy.stats
+* 딥러닝: TensorFlow
+
+학습 방식
+
+* 지도학습: Decision Tree, Random Forest, Logistic Regression, SVM, KNN
+* 비지도학습: K-means, PCA
+
+[2] 데이터 탐색 (EDA)
+
+[2.1] 변수의 종류
+
+* 명목형: 순서 없음 (예: 성별)
+* 순서형: 순서 있음 (예: 상·중·하)
+* 구간형: 간격 의미, 절대영점 없음
+* 비율형: 연속형, 절대영점 존재
+* 변수 타입: 연속형 / 이산형 / 범주형
+* 데이터 품질: 결측값, 이상치
+
+[2.2] 통계 요약
+
+* 중심 측도: 평균, 중앙값, 최빈값
+* 산포 측도: 분산, 표준편차
+* 왜도: 분포의 치우침 정도
+* 첨도: 분포의 뾰족함
+
+[2.3] 기초 통계량
+
+* `describe()`
+
+  * 수치형: 평균, 표준편차, 사분위수
+  * 범주형: unique 수, 최빈값
+* `unique()`, `nunique()`, `value_counts()`
+
+[2.4] EDA 자동화 (dataprep)
+
+* plot(): 분포 및 요약 통계
+* plot_correlation(): 상관계수 히트맵
+* plot_missing(): 결측치 시각화
+* plot_diff(): 데이터 비교
+
+[2.5] 상관분석
+
+* 공분산: 단위 의존
+* 상관계수: -1 ~ 1
+* Pearson: 연속형, 선형 관계
+* Spearman: 순위 데이터, 비정규 분포
+
+[2.6] 독립성 검정
+
+* Fisher Exact Test: 표본 수 적을 때
+* McNemar Test: 전/후 비교 데이터
+
+[3] 데이터 전처리
+
+* 전체 프로젝트의 약 60% 차지
+* 전처리 품질 → 모델 성능 결정
+
+[3.1] 데이터 스케일링
+
+* fit / transform / fit_transform
+
+스케일러 종류
+
+* StandardScaler: 평균 0, 표준편차 1
+* MinMaxScaler: 0~1 범위
+* MaxAbsScaler: -1~1 범위
+* RobustScaler: 중앙값 기준, 이상치에 강함
+* Normalizer: 벡터 정규화
+
+[3.2] 인코딩
+
+* Label Encoding: 범주 → 정수
+* One-Hot Encoding: 범주 → 이진 벡터
+* OneHotEncoder
+* LabelBinarizer
+* to_categorical
+* get_dummies
+
+* 평균값 인코딩: 타겟 평균으로 변환 (과적합 위험)
+
+[3.3] 결측값 처리
+
+* Pandas: fillna(평균, 중앙값, 최빈값)
+* sklearn: SimpleImputer
+
+[4] 머신러닝 프로젝트 흐름
+
+데이터 수집
+→ 데이터 탐색(EDA)
+→ 전처리
+→ 모델 학습
+→ 성능 평가
+→ 서비스 및 배포

@@ -1,0 +1,7 @@
+conda create -n ml-dl-nlp python=3.10 -y
+conda activate ml-dl-nlp
+
+conda install ipykernel -y
+conda install -c conda-forge geopandas -y
+
+python -m ipykernel install --user --name ml-dl-nlp --display-name "ml-dl-nlp(ipykernel)"

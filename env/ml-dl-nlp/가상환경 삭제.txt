@@ -1,0 +1,8 @@
+Jupyter에 등록된 커널 삭제
+jupyter kernelspec remove ml-dl-nlp
+
+conda 가상환경 삭제
+conda env remove -n ml-dl-nlp
+
+삭제확인
+conda env list
